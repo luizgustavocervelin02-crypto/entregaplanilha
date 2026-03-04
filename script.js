@@ -44,6 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = userNameInput.value.trim();
         if (name.length >= 2) {
             localStorage.setItem('membersAreaUserName', name);
+
+            // Set start date if it doesn't exist
+            if (!localStorage.getItem('membersAreaStartDate')) {
+                localStorage.setItem('membersAreaStartDate', new Date().toISOString());
+            }
+
             displayUserName.textContent = name;
             certStudentName.textContent = name;
             welcomeModal.style.display = 'none';
@@ -59,18 +65,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const certDateSpan = document.getElementById('cert-date');
     const certificateTemplate = document.getElementById('certificate-template');
 
-    // Configuração de Teste: mude para false para testar o bloqueio real de 7 dias
-    const testMode = true;
-
-    // Define a data atual no certificado
-    const today = new Date();
-    certDateSpan.textContent = today.toLocaleDateString('pt-BR');
-
-    // Simulação da data de término do curso (para testes, se testMode = false)
-    // Supondo que o usuário terminou hoje, só poderia baixar daqui a 7 dias
-    const courseCompletionDate = new Date();
+    // Lógica do bloqueio de 7 dias
+    const testMode = false; // Desativando o modo de teste para bloquear de verdade
     const daysRequired = 7;
-    const daysPassed = 0; // Altere para > 7 para testar o desbloqueio quando testMode = false
+
+    // Recupera a data de início ou usa a de hoje como fallback (se burlar o modal de alguma forma)
+    const startDateString = localStorage.getItem('membersAreaStartDate');
+    const startDate = startDateString ? new Date(startDateString) : new Date();
+
+    // Calcula os dias passados
+    const today = new Date();
+    const timeDiff = today.getTime() - startDate.getTime();
+    const daysPassed = Math.floor(timeDiff / (1000 * 3600 * 24));
+
+    // Exibe a data de hoje no certificado
+    certDateSpan.textContent = today.toLocaleDateString('pt-BR');
 
     if (!testMode && daysPassed < daysRequired) {
         // Bloqueia o download
@@ -79,6 +88,13 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadBtn.style.opacity = '0.5';
         downloadBtn.style.cursor = 'not-allowed';
         certMessage.style.display = 'flex';
+
+        // Atualiza a mensagem para mostrar quantos dias faltam
+        const daysLeft = daysRequired - daysPassed;
+        const certMsgText = certMessage.querySelector('p');
+        if (certMsgText) {
+            certMsgText.innerHTML = `Seu certificado oficial estará disponível em <strong>${daysLeft} dia(s)</strong>.`;
+        }
     }
 
     // Função para gerar o PDF
