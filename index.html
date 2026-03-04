@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área de Membros - Entregável</title>
+    <link rel="stylesheet" href="style.css?v=3">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2pdf Library for Certificate Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <!-- Welcome Modal -->
+    <div id="welcome-modal"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 9999;">
+        <div
+            style="background: white; padding: 40px; border-radius: 10px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <h2 style="color: #132644; margin-bottom: 20px; font-family: 'Inter', sans-serif;">Bem-vindo(a)!</h2>
+            <p style="color: #555; margin-bottom: 20px; font-size: 16px; font-family: 'Inter', sans-serif;">Por favor,
+                digite seu nome completo para o certificado:</p>
+            <input type="text" id="user-name-input" placeholder="Seu nome completo"
+                style="width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; font-family: 'Inter', sans-serif;">
+            <p id="name-error"
+                style="color: #dc3545; display: none; margin-bottom: 15px; font-size: 14px; font-weight: bold;">⚠️ Você
+                precisa informar seu nome.</p>
+            <button id="save-name-btn"
+                style="width: 100%; padding: 15px; background: #1faa59; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; text-transform: uppercase;">Acessar
+                Área de Membros</button>
+        </div>
+    </div>
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-chart-line logo-icon"></i>
+                <h2>Dashboard</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" data-target="inicio">
+                    <i class="fas fa-home"></i> Início
+                </button>
+                <button class="nav-btn" data-target="aulas">
+                    <i class="fas fa-play-circle"></i> Aulas
+                </button>
+                <button class="nav-btn" data-target="bonus">
+                    <i class="fas fa-gift"></i> Bônus
+                </button>
+                <button class="nav-btn" data-target="certificado">
+                    <i class="fas fa-award"></i> Certificado
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Membro VIP</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="welcome-message">
+                    <h1>Seja bem-vindo(a), <span id="display-user-name">Membro VIP</span>!</h1>
+                    <p>Acesse aqui todos os materiais do seu produto.</p>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Tabs Content -->
+            <div class="content-wrapper">
+
+                <!-- Tab: Início -->
+                <section id="inicio" class="tab-content active">
+                    <div class="section-header">
+                        <h2>Sua Compra</h2>
+                        <div class="divider"></div>
+                    </div>
+
+                    <div class="products-grid">
+                        <!-- Product Card 1 -->
+                        <div class="product-card">
+                            <div class="product-image-placeholder">
+                                <i class="fas fa-file-excel"></i>
+                                <span>Controle Financeiro</span>
+                            </div>
+                            <div class="product-info">
+                                <span class="badge">Versão 1.0</span>
+                                <h3>Planilha de Precificação Lucrativa</h3>
+                                <p>A ferramenta completa para organizar seu negócio, definir margens corretas e aumentar
+                                    seus ganhos gerais.</p>
+                                <div class="card-actions">
+                                    <button class="btn btn-primary"><i class="fas fa-download"></i> Baixar
+                                        Planilha</button>
+                                    <button class="btn btn-secondary"><i class="fas fa-video"></i> Ver Tutorial</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 2 -->
+                        <div class="product-card">
+                            <div class="product-image-placeholder alt">
+                                <i class="fas fa-chart-pie"></i>
+                                <span>Dashboard Dinâmico</span>
+                            </div>
+                            <div class="product-info">
+                                <span class="badge">Bônus Incluso</span>
+                                <h3>Dashboard de Margem Lucrativa</h3>
+                                <p>Acompanhe visualmente a evolução da sua receita, custos e lucros através deste painel
+                                    iterativo exclusivo.</p>
+                                <div class="card-actions">
+                                    <button class="btn btn-primary"><i class="fas fa-download"></i> Baixar
+                                        Dashboard</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tab: Aulas -->
+                <section id="aulas" class="tab-content">
+                    <div class="section-header">
+                        <h2>Módulos do Curso</h2>
+                        <div class="divider"></div>
+                    </div>
+
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-image-placeholder" style="height: 150px;">
+                                <i class="fas fa-play-circle"></i>
+                                <span>Módulo 1</span>
+                            </div>
+                            <div class="product-info">
+                                <h3>Introdução à Precificação</h3>
+                                <p>Aprenda os conceitos básicos e fundamentais para começar a usar a planilha.</p>
+                                <div class="card-actions">
+                                    <button class="btn btn-secondary"><i class="fas fa-play"></i> Assistir Aula</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image-placeholder" style="height: 150px;">
+                                <i class="fas fa-play-circle"></i>
+                                <span>Módulo 2</span>
+                            </div>
+                            <div class="product-info">
+                                <h3>Preenchendo Custos</h3>
+                                <p>Passo a passo na prática de como inserir seus custos diretos e indiretos.</p>
+                                <div class="card-actions">
+                                    <button class="btn btn-secondary"><i class="fas fa-play"></i> Assistir Aula</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tab: Bônus -->
+                <section id="bonus" class="tab-content">
+                    <div class="section-header">
+                        <h2>Meus Bônus</h2>
+                        <div class="divider"></div>
+                    </div>
+
+                    <div class="bonus-container">
+                        <div class="empty-state">
+                            <i class="fas fa-box-open"></i>
+                            <h3>Novos bônus serão liberados em breve!</h3>
+                            <p>Fique atento a esta área, nossa equipe adicionará conteúdos exclusivos para complementar
+                                sua jornada lucrativa muito em breve.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tab: Certificado -->
+                <section id="certificado" class="tab-content">
+                    <div class="section-header">
+                        <h2>Certificado de Conclusão</h2>
+                        <div class="divider"></div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%;">
+                        <div id="cert-status-message"
+                            style="display: none; background: #fff3cd; color: #856404; padding: 15px; border-radius: 5px; width: 100%; max-width: 800px; text-align: center; font-weight: bold; border: 1px solid #ffeeba;">
+                            Seu certificado estará disponível 7 dias após a conclusão.
+                        </div>
+
+                        <button id="download-cert-btn"
+                            style="padding: 15px 30px; font-size: 16px; background: #1faa59; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                            <i class="fas fa-download"></i> Baixar Certificado em PDF
+                        </button>
+
+                        <div id="capture-wrapper"
+                            style="width: 100%; overflow-x: auto; display: flex; justify-content: center; padding: 20px; background: #f5f5f5; border-radius: 10px;">
+                            <div id="certificate-template"
+                                style="width: 800px; height: 566px; background: white; padding: 20px; font-family: Arial, sans-serif; position: relative;">
+                                <div style="border: 8px solid #132644; height: 100%; padding: 6px;">
+                                    <div
+                                        style="border: 2px solid #cd9c46; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; text-align: center;">
+
+                                        <i class="fas fa-award"
+                                            style="font-size: 60px; color: #cd9c46; margin-bottom: 15px;"></i>
+                                        <h1
+                                            style="color: #132644; font-size: 42px; margin: 0 0 5px 0; text-transform: uppercase; letter-spacing: 4px;">
+                                            Certificado</h1>
+                                        <h2
+                                            style="color: #cd9c46; font-size: 20px; margin: 0 0 25px 0; letter-spacing: 5px;">
+                                            DE CONCLUSÃO</h2>
+
+                                        <p style="font-size: 18px; color: #555; margin: 0 0 10px 0;">Certificamos que
+                                        </p>
+
+                                        <h3 class="student-name"
+                                            style="font-size: 38px; color: #132644; margin: 0 0 15px 0; border-bottom: 2px solid #cd9c46; padding-bottom: 5px; min-width: 400px; font-style: italic;">
+                                            Nome do Aluno</h3>
+
+                                        <p style="font-size: 18px; color: #555; margin: 0 0 15px 0;">concluiu com êxito
+                                            o treinamento</p>
+
+                                        <h4 style="font-size: 28px; color: #1faa59; margin: 0 0 40px 0;">Planilha de
+                                            Precificação Lucrativa</h4>
+
+                                        <div
+                                            style="display: flex; justify-content: space-between; width: 100%; padding: 0 40px; margin-top: auto;">
+                                            <div style="text-align: center;">
+                                                <div
+                                                    style="width: 200px; border-bottom: 1px solid #333; margin-bottom: 5px;">
+                                                </div>
+                                                <p style="font-size: 16px; font-weight: bold; color: #333; margin: 0;">
+                                                    Instrutor Chefe</p>
+                                            </div>
+
+                                            <div style="text-align: center;">
+                                                <div
+                                                    style="width: 200px; border-bottom: 1px solid #333; margin-bottom: 5px; height: 20px; display: flex; align-items: flex-end; justify-content: center;">
+                                                    <span id="cert-date"
+                                                        style="font-weight: bold; font-size: 16px; color: #333;"></span>
+                                                </div>
+                                                <p style="font-size: 16px; font-weight: bold; color: #333; margin: 0;">
+                                                    Data de Conclusão</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js?v=3"></script>
+</body>
+
+</html>
